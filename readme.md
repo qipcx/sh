@@ -1,12 +1,14 @@
-## Sorbing's Utils
+## Sorbing Utils
 
-```shell
+```text
 https://raw.githubusercontent.com/sorbing/utils/main/vps/run-proxy.sh
-https://cdn.rawgit.com/sorbing/utils/main/vps/run-proxy.sh # Moved Permanently. Redirecting to https://cdn.jsdelivr.net/gh/sorbing/utils@main/vps/run-proxy.sh
+# OR:
 https://cdn.jsdelivr.net/gh/sorbing/utils@main/vps/run-proxy.sh
 ```
 
 ```shell
 bash <(curl -s https://raw.githubusercontent.com/sorbing/utils/main/vps/run-proxy.sh)
-curl -s https://raw.githubusercontent.com/sorbing/utils/main/vps/run-proxy.sh | bash  ## Нет интерактива
+bash <(curl -s https://raw.githubusercontent.com/sorbing/utils/main/vps/run-proxy.sh) --port=XXXXX --user=... --pass=...
+
+bash <(curl -s https://raw.githubusercontent.com/sorbing/utils/main/vps/run-vpn.sh)
 ```
