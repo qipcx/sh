@@ -7,7 +7,7 @@ port=$(echo -n "$@" | grep -Po '(?<=--port=)[^ "]+')
 user=$(echo -n "$@" | grep -Po '(?<=--user=)[^ "]+')
 pass=$(echo -n "$@" | grep -Po '(?<=--pass=)[^ "]+')
 
-rand_pass=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9@#_%^&' | fold -w 12 | head -n 1)
+rand_pass=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9#_%^&' | fold -w 12 | head -n 1)
 
 test -z "$port" && read -r -p "Proxy port: " port
 test -z "$user" && read -r -p "Proxy user: " user
@@ -19,8 +19,15 @@ command -v proxy &> /dev/null || sudo pip install --upgrade --prefix /usr/local 
 
 #sudo iptables -I INPUT 5 -i ens3 -p tcp --dport "$port" -m state --state NEW,ESTABLISHED -j ACCEPT
 
-cmd="proxy --hostname 0.0.0.0 --port $port --basic-auth \"$user:$pass\""
-echo "See: https://github.com/abhinavsingh/proxy.py#start-proxypy"
-echo "IP: $(curl -s checkip.amazonaws.com)"
-echo "$cmd"
+ip=$(curl -s checkip.amazonaws.com)
+
+cmd="proxy --hostname 0.0.0.0 --port $port --basic-auth $user:$pass"
+
+echo
+echo "See:  https://github.com/abhinavsingh/proxy.py#start-proxypy"
+echo "Run:  $cmd"
+echo "IP:   $ip"
+echo "Test: curl -x http://$user:$pass@$ip:$port http://checkip.amazonaws.com"
+echo
+
 eval "$cmd"
