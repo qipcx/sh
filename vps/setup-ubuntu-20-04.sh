@@ -2,6 +2,10 @@
 
 sudo apt install bash-completion && . /etc/profile.d/bash_completion.sh
 
+sudo timedatectl set-timezone Europe/Kiev
+#timedatectl list-timezones | grep Kiev
+#sudo systemctl restart mysql.service
+
 command -v nano &> /dev/null || sudo apt install nano -y
 
 read -r -n 1 -p "Install the Byobu? [Y/n] " reply
