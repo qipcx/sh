@@ -19,10 +19,11 @@ if [[ -f $status_path ]]; then
   byobu_ip=$(__ip_address t 2> /dev/null)
   real_ip=$(curl -s http://checkip.amazonaws.com/)
 
-  if [[ $byobu_ip != $real_ip ]]; then
+  if [[ "$byobu_ip" != "$real_ip" ]]; then
     echo "You byobu IP $byobu_ip is not equal real IP $real_ip"
     read -r -n 1 -p "Switch ~/.byobu/statusrc config to show real IP? [Y/n] " reply
     if [[ -z "$reply" || "$reply" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+      echo
       sed -i 's/.*IP_EXTERNAL=.*$/IP_EXTERNAL=1/' ~/.byobu/statusrc
       echo "Changed: IP_EXTERNAL=1 in the ~/.byobu/statusrc"
     fi

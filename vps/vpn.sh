@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if command -v apt &> /dev/null; then command -v docker &> /dev/null || sudo apt install docker.io -y; fi
+if command -v apt &> /dev/null; then command -v docker &> /dev/null || (sudo apt update && sudo apt install docker.io -y); fi  ## 25 sec
 
 if [[ -z $(id -nG | grep docker) ]]; then
   sudo usermod -aG docker "$USER"
