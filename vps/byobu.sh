@@ -14,9 +14,18 @@ if [[ -f $status_path ]]; then
   sed -i 's/^tmux_right=.*$/tmux_right="network raid services processes load_average cpu_count cpu_freq memory swap disk disk_io uptime distro release updates_available reboot_required apport ip_address custom date time"/' $status_path
 
   ## Test Real IP
-  . /usr/lib/byobu/include/dirs
-  . /usr/lib/byobu/include/shutil
-  . /usr/lib/byobu/ip_address
+  if [[ -d  /usr/lib/byobu/ ]]; then
+    . /usr/lib/byobu/include/dirs
+    . /usr/lib/byobu/include/shutil
+    . /usr/lib/byobu/ip_address
+  fi
+
+  if [[ -d /usr/libexec/byobu/ ]]; then # centos 7
+    . /usr/libexec/byobu/include/dirs
+    . /usr/libexec/byobu/include/shutil
+    . /usr/libexec/byobu/ip_address
+  fi
+
   byobu_ip=$(__ip_address t 2> /dev/null)
   real_ip=$(curl -s http://checkip.amazonaws.com/)
 
