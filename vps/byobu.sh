@@ -1,6 +1,7 @@
 #!/bin/bash
 
 if command -v apt &> /dev/null; then command -v byobu &> /dev/null || sudo apt install byobu -y; fi
+if command -v yum &> /dev/null; then command -v byobu &> /dev/null || sudo yum install byobu -y; fi ## sudo yum check-update; yum info byobu2 && echo OK || echo NO
 
 (nohup byobu >/dev/null 2>&1 &) > /dev/null
 sleep 3
