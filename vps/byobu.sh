@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+echo "1. Check dependencies"
 if command -v apt &> /dev/null; then command -v byobu &> /dev/null || sudo apt install byobu -y; fi
 if command -v yum &> /dev/null; then command -v byobu &> /dev/null || sudo yum install byobu -y; fi ## sudo yum check-update; yum info byobu2 && echo OK || echo NO
 
@@ -12,7 +13,7 @@ if [ ! -f $status_path ]; then
   kill $(ps aux | grep byobu-shell | awk '{print $2}') >/dev/null 2>&1
 fi
 
-if [ ! -f $status_path ]; then
+if [ -f $status_path ]; then
   sed -i 's/^tmux_left=.*$/tmux_left="logo #distro #release #arch #whoami #hostname session"/' $status_path
   sed -i 's/^tmux_right=.*$/tmux_right="network raid services processes load_average cpu_count cpu_freq memory swap disk disk_io uptime distro release updates_available reboot_required apport ip_address custom date time"/' $status_path
 
