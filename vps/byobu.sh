@@ -38,9 +38,10 @@ if [ -f $status_path ]; then
     #read -r -n 1 -p "Switch ~/.byobu/statusrc config to show real IP? [Y/n] " reply
     #if [[ -z "$reply" || "$reply" =~ ^([yY][eE][sS]|[yY])$ ]]; then  ## @todo Replace for sh: 35: Syntax error: "(" unexpected (expecting "then")
     if true; then
-      echo
+      #echo # need for reply
       sed -i 's/.*IP_EXTERNAL=.*$/IP_EXTERNAL=1/' ~/.byobu/statusrc
       echo "Changed: IP_EXTERNAL=1 in the ~/.byobu/statusrc"
+      echo
       echo "You can change it:"
       echo "sed -i 's^IP_EXTERNAL=1^IP_EXTERNAL=0^' ~/.byobu/statusrc"
       echo "sed -i 's^IP_EXTERNAL=0^IP_EXTERNAL=1^' ~/.byobu/statusrc"

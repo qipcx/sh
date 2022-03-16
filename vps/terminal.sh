@@ -9,7 +9,7 @@ bind '"\e[1;5C": forward-word'    # Ctrl+Right
 bind '"\e[A": history-search-backward' # History search by begin text
 bind '"\e[B": history-search-forward'  # History search by begin text
 
-# stty werase ^H; stty kill ^K; bind '"\C-u": undo';
+tty werase ^H; stty kill ^K; bind '"\C-u": undo';
 
 tee ~/.inputrc cat > /dev/null <<EOT
 # Ctrl+Backspace

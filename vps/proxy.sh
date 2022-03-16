@@ -6,11 +6,13 @@ pass=$(echo -n "$@" | grep -Po '(?<=--pass=)[^ "]+')
 
 # @todo Alternative format: --port 56293 --basic-auth user:pass
 
+rand_user=$(cat /dev/urandom | tr -dc 'a-z' | fold -w 6 | head -n 1)
 rand_pass=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9#_%^&' | fold -w 12 | head -n 1)
+rand_port="5"$(cat /dev/urandom | tr -dc '0-9' | fold -w 4 | head -n 1)
 
-test -z "$port" && read -r -p "Proxy port: " port
-test -z "$user" && read -r -p "Proxy user: " user
+test -z "$user" && read -r -p "Proxy user ($rand_user): " user
 test -z "$pass" && read -r -p "Proxy pass ($rand_pass): " pass
+test -z "$port" && read -r -p "Proxy port ($rand_port): " port
 pass=${pass:-$rand_pass}
 
 test -z "$port" && { echo "Not specified --port!"; exit 1; }
@@ -23,7 +25,7 @@ command -v proxy &> /dev/null || sudo pip install --upgrade --prefix /usr/local 
 
 sudo iptables -I INPUT 5 -p tcp --dport "$port" -m state --state NEW,ESTABLISHED -j ACCEPT
 
-ip=$(curl -s checkip.amazonaws.com)
+ip=$(curl -s 2ip.fun)
 
 cmd="proxy --hostname 0.0.0.0 --port $port --basic-auth $user:$pass"
 
