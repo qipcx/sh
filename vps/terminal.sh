@@ -1,5 +1,11 @@
 #!/bin/bash
 
+shell=$(readlink /proc/$$/exe) # /usr/bin/bash
+if ! [ "$shell" = "/usr/bin/bash" ]; then
+  >&2 echo -e "Run in bash:\nbash <(curl -sL qip.cx/vps/terminal.sh)"
+  exit 1
+fi
+
 bind -p > ~/.inputrc-restore
 
 bind '"\C-h": backward-kill-word' # Ctrl+Backspace
@@ -9,7 +15,7 @@ bind '"\e[1;5C": forward-word'    # Ctrl+Right
 bind '"\e[A": history-search-backward' # History search by begin text
 bind '"\e[B": history-search-forward'  # History search by begin text
 
-tty werase ^H; stty kill ^K; bind '"\C-u": undo';
+stty werase ^H; stty kill ^K; bind '"\C-u": undo';
 
 tee ~/.inputrc cat > /dev/null <<EOT
 # Ctrl+Backspace
