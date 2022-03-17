@@ -17,23 +17,20 @@ fi
 if [ -f $status_path ]; then
   echo "Update $status_path"
   sed -i 's/^tmux_left=.*$/tmux_left="logo #distro #release #arch #whoami #hostname session"/' $status_path
-  sed -i 's/^tmux_right=.*$/tmux_right="network raid services processes load_average cpu_count cpu_freq memory swap disk disk_io uptime distro release updates_available reboot_required apport ip_address custom date time"/' $status_path
+  sed -i 's/^tmux_right=.*$/tmux_right="network raid services processes load_average cpu_count cpu_freq memory swap disk disk_io uptime distro release updates_available reboot_required apport ip_address custom #date time"/' $status_path
 
   ## Test Real IP
-  if [ -d  /usr/lib/byobu/ ]; then
-    . /usr/lib/byobu/include/dirs
-    . /usr/lib/byobu/include/shutil
-    . /usr/lib/byobu/ip_address
+  if [ -d  /usr/lib/byobu/ ]; then # ubuntu
+    . /usr/lib/byobu/include/dirs && . /usr/lib/byobu/include/shutil && . /usr/lib/byobu/ip_address
   fi
 
   if [ -d /usr/libexec/byobu/ ]; then # centos 7
-    . /usr/libexec/byobu/include/dirs
-    . /usr/libexec/byobu/include/shutil
-    . /usr/libexec/byobu/ip_address
+    . /usr/libexec/byobu/include/dirs && . /usr/libexec/byobu/include/shutil && . /usr/libexec/byobu/ip_address
   fi
 
   byobu_ip=$(__ip_address t 2> /dev/null)
-  real_ip=$(curl -s http://checkip.amazonaws.com/)
+  #real_ip=$(curl -s http://checkip.amazonaws.com/)
+  real_ip=$(curl -s 2ip.fun)
 
   if [ "$byobu_ip" != "$real_ip" ]; then
     echo "You byobu IP $byobu_ip is not equal real IP $real_ip"
@@ -47,13 +44,14 @@ if [ -f $status_path ]; then
       echo "You can change it:"
       echo "sed -i 's^IP_EXTERNAL=1^IP_EXTERNAL=0^' ~/.byobu/statusrc"
       echo "sed -i 's^IP_EXTERNAL=0^IP_EXTERNAL=1^' ~/.byobu/statusrc"
+      echo "nano $status_path"
       echo
     fi
   fi
 
   #byobu-enable
   echo "Run: byobu"
-  byobu
+  #byobu # Error: open terminal failed: not a terminal
 else
   echo "⚠ Config not found: $status_path"
   echo "Try start byobu and run script again"
