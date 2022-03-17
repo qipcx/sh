@@ -7,7 +7,7 @@ if ! [ "$shell" = "/usr/bin/bash" ]; then
   exit 1
 fi
 
-bind -p > ~/.inputrc-restore
+bind -p > ~/.inputrc-restore 2>/dev/null
 
 #bind '"\C-h": backward-kill-word' # Ctrl+Backspace
 #bind '"\C-k": unix-line-discard'  # Kill line
@@ -30,7 +30,7 @@ tee ~/.inputrc cat > /dev/null <<EOT
 #set show-all-if-ambiguous on
 EOT
 
-bind -f ~/.inputrc
+bind -f ~/.inputrc 2>/dev/null
 
 echo "Use to restore/reset settings:"
 echo 'stty sane && bind -f ~/.inputrc-restore'
