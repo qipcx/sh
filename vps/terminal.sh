@@ -29,5 +29,7 @@ EOT
 
 bind -f ~/.inputrc 2>/dev/null
 
-echo "Use to restore settings:"
+echo "To Restore settings:"
 echo 'stty sane && bind -f ~/.inputrc-restore'
+echo "To Apply settings:"
+echo "bind -f ~/.inputrc"
