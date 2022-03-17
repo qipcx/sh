@@ -2,9 +2,10 @@
 
 shell=$(readlink /proc/$$/exe) # /usr/bin/bash
 if ! [ "$shell" = "/usr/bin/bash" ]; then
-  echo "Run in bash:"
-  echo "bash <(curl -sL qip.cx/vps/terminal.sh)"
-  exit 1
+  #echo "Run in bash:"
+  #echo "bash <(curl -sL qip.cx/vps/terminal.sh)"
+  #exit 1
+  curl -sL qip.cx/vps/terminal.sh | bash
 fi
 
 bind -p > ~/.inputrc-restore 2>/dev/null
@@ -12,8 +13,6 @@ bind -p > ~/.inputrc-restore 2>/dev/null
 #bind '"\C-h": backward-kill-word' # Ctrl+Backspace
 #bind '"\C-k": unix-line-discard'  # Kill line
 #bind '"\C-j": undo'  # Undo kill
-#bind '"\e[A": history-search-backward' # History search by begin text
-#bind '"\e[B": history-search-forward'  # History search by begin text
 
 tee ~/.inputrc cat > /dev/null <<EOT
 # Ctrl+Backspace
