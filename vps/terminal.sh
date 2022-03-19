@@ -8,8 +8,8 @@ bind -p > ~/.inputrc-backup.conf 2>/dev/null
 #bind '"\C-h": backward-kill-word' 2>/dev/null # Ctrl+Backspace
 
 tee ~/.inputrc cat > /dev/null <<EOT
-## Ctrl+Backspace, Ctrl+K, Ctrl+J (Ломает Ctrl+K)
-#"\C-h": backward-kill-word
+## Ctrl+Backspace. Ломает Ctrl+K!
+"\C-h": backward-kill-word
 
 ## Copy current command to "kill buffer"
 "\C-j": copy-region-as-kill
