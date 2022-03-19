@@ -3,7 +3,7 @@
 [ "$(readlink /proc/$$/exe)" = /usr/bin/bash ] || { curl -sL qip.cx/vps/byobu.sh | bash -s -- "$@"; exit; } ## Run in bash
 
 echo "⚑ Check dependencies.."
-if command -v apt &> /dev/null; then command -v byobu &> /dev/null || sudo apt install byobu -y; fi
+if command -v apt &> /dev/null; then command -v byobu &> /dev/null || sudo apt install byobu -y -qq -o=Dpkg::Use-Pty=0; fi
 if command -v yum &> /dev/null; then command -v byobu &> /dev/null || sudo yum install byobu -y; fi ## sudo yum check-update; yum info byobu2 && echo OK || echo NO
 
 status_path=~/.byobu/status

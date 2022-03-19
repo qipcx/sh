@@ -1,35 +1,33 @@
 #!/bin/bash
 
-shell=$(readlink /proc/$$/exe) # /usr/bin/bash
-if ! [ "$shell" = "/usr/bin/bash" ]; then
-  curl -sL qip.cx/vps/terminal.sh | bash
-  exit
-fi
+[ "$(readlink /proc/$$/exe)" = /usr/bin/bash ] || { curl -sL qip.cx/vps/terminal.sh | bash -s -- "$@"; exit; } ## Run in bash
 
-bind -p > ~/.inputrc-restore 2>/dev/null
+bind -p > ~/.inputrc-backup.conf 2>/dev/null
 
-bind '"\C-h": backward-kill-word' 2>/dev/null # Ctrl+Backspace
-bind '"\C-k": unix-line-discard'  2>/dev/null # Kill line
-bind '"\C-j": undo' 2>/dev/null # Undo kill
+## Not works from script
+#bind '"\C-h": backward-kill-word' 2>/dev/null # Ctrl+Backspace
 
 tee ~/.inputrc cat > /dev/null <<EOT
-# Ctrl+Backspace
-"\C-h": backward-kill-word
+## Ctrl+Backspace, Ctrl+K, Ctrl+J (Ломает Ctrl+K)
+#"\C-h": backward-kill-word
 
-"\C-k": unix-line-discard
-"\C-j": undo
+## Copy current command to "kill buffer"
+"\C-j": copy-region-as-kill
 
-# History search by begin text
+#"\C-k": unix-line-discard
+#"\C-j": undo
+
+## History search by begin text
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 
-# Дополнение по одиночному Tab, вместо двойной Tab
+## Command completion by single Tab, instead double Tab
 #set show-all-if-ambiguous on
 EOT
 
+## Not works from script
 bind -f ~/.inputrc 2>/dev/null
 
-echo "To Restore settings:"
-echo 'stty sane && bind -f ~/.inputrc-restore'
-echo "To Apply settings:"
-echo "bind -f ~/.inputrc"
+echo "🛈 To Restore settings:  bind -f ~/.inputrc-backup.conf"
+#echo 'stty sane && bind -f ~/.inputrc-backup.conf'
+echo "🛈 To Apply settings:    bind -f ~/.inputrc"

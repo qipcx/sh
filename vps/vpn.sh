@@ -1,6 +1,8 @@
 #!/bin/bash
 
-if command -v apt &> /dev/null; then command -v docker &> /dev/null || (sudo apt update -qq && sudo apt install docker.io -y); fi  ## 25 sec
+[ "$(readlink /proc/$$/exe)" = /usr/bin/bash ] || { curl -sL qip.cx/vps/vpn.sh | bash -s -- "$@"; exit; } ## Run in bash
+
+if command -v apt &> /dev/null; then command -v docker &> /dev/null || (sudo apt update -qq && sudo apt install docker.io -y -qq -o=Dpkg::Use-Pty=0); fi  ## 25 sec
 
 if [[ -z $(id -nG | grep docker) ]]; then
   sudo usermod -aG docker "$USER"
