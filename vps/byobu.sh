@@ -1,6 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-echo "Check dependencies.."
+[ "$(readlink /proc/$$/exe)" = /usr/bin/bash ] || { curl -sL qip.cx/vps/byobu.sh | bash -s -- "$@"; exit; } ## Run in bash
+
+echo "⚑ Check dependencies.."
 if command -v apt &> /dev/null; then command -v byobu &> /dev/null || sudo apt install byobu -y; fi
 if command -v yum &> /dev/null; then command -v byobu &> /dev/null || sudo yum install byobu -y; fi ## sudo yum check-update; yum info byobu2 && echo OK || echo NO
 
@@ -8,14 +10,14 @@ status_path=~/.byobu/status
 
 ## @note Hack. Init the ~/.byobu directory & configs
 if [ ! -f $status_path ]; then
-  echo "Init ~/.byobu/ configs.."
+  echo "⚑ Init ~/.byobu/ configs.."
   (nohup byobu >/dev/null 2>&1 &) > /dev/null
   sleep 3
   kill $(ps aux | grep byobu-shell | awk '{print $2}') >/dev/null 2>&1
 fi
 
 if [ -f $status_path ]; then
-  echo "Update $status_path"
+  echo "⚑ Update $status_path"
   sed -i 's/^tmux_left=.*$/tmux_left="logo #distro #release #arch #whoami #hostname session"/' $status_path
   sed -i 's/^tmux_right=.*$/tmux_right="network raid services processes load_average cpu_count cpu_freq memory swap disk disk_io uptime distro release updates_available reboot_required apport ip_address custom #date time"/' $status_path
 
@@ -39,7 +41,7 @@ if [ -f $status_path ]; then
     if true; then
       #echo # need for reply
       sed -i 's/.*IP_EXTERNAL=.*$/IP_EXTERNAL=1/' ~/.byobu/statusrc
-      echo "Changed: IP_EXTERNAL=1 in the ~/.byobu/statusrc"
+      echo "⚑ Changed: IP_EXTERNAL=1 in the ~/.byobu/statusrc"
       echo
       echo "You can change it:"
       echo "sed -i 's^IP_EXTERNAL=1^IP_EXTERNAL=0^' ~/.byobu/statusrc"
