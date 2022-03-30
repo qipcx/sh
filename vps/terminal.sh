@@ -6,6 +6,7 @@ bind -p > ~/.inputrc-backup.conf 2>/dev/null
 
 #cat <<<EOF
 #bind '"\C-h": backward-kill-word'
+#bind '"\e[3;5~": kill-word'  ## Ctrl+Del
 #bind '"\e[3;2~": kill-whole-line'
 #bind '"\e[1~" beginning-of-line'
 #bind '"\e[4~" end-of-line'
@@ -24,6 +25,9 @@ bind -p > ~/.inputrc-backup.conf 2>/dev/null
 tee ~/.inputrc cat > /dev/null <<EOT
 ## Ctrl+Backspace
 "\C-h": backward-kill-word
+
+## Ctrl+Del
+"\e[3;5~": kill-word
 
 ## Shift+Delete
 "\e[3;2~": kill-whole-line
