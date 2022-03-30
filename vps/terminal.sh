@@ -16,11 +16,7 @@ bind -p > ~/.inputrc-backup.conf 2>/dev/null
 
 ## Not works from script
 #bind '"\C-h": backward-kill-word' 2>/dev/null   ## Ctrl+Backspace
-#bind '"\e[3;2~": kill-whole-line' 2>/dev/null ## Shift+Delete: Удалить строку
-#bind '"\e[1~" beginning-of-line' 2>/dev/null
-#bind '"\e[4~" end-of-line' 2>/dev/null
-#bind '"\e[A": history-search-backward' 2>/dev/null
-#bind '"\e[B": history-search-forward' 2>/dev/null
+
 
 tee ~/.inputrc cat > /dev/null <<EOT
 ## Ctrl+Backspace
@@ -33,8 +29,8 @@ tee ~/.inputrc cat > /dev/null <<EOT
 "\e[3;2~": kill-whole-line
 
 ## Ctrl+Left/Right
-#"\e[1;5D": backward-word
-#"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
 
 ## Home/End
 #"\e[1~" beginning-of-line
@@ -45,9 +41,9 @@ tee ~/.inputrc cat > /dev/null <<EOT
 "\e[B": history-search-forward
 
 ## Copy current command to "kill buffer"
+#"\C-k": unix-line-discard
 #"\C-j": copy-region-as-kill
 #"\C-j": undo
-#"\C-k": unix-line-discard
 
 ## Command completion by single Tab, instead double Tab
 #set show-all-if-ambiguous on
