@@ -1,6 +1,7 @@
 #!/bin/bash
 
-[ "$(readlink /proc/$$/exe)" = /usr/bin/bash ] || { curl -sL qip.cx/vps/wg.sh | bash -s -- "$@"; exit; } ## Run in bash
+if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL qip.cx/vps/wg.sh | bash -s -- "$@"; exit; fi ## Run in bash
+
 [ "${-#*s}" = "$-" ] || { echo "⚠ Run as: bash <(curl qip.cx/vps/wg.sh)"; bash <(curl -sL qip.cx/vps/wg.sh) -s -- "$@"; exit 0; } ## Exec from stdin. Try run with `read` support
 # @todo Required run as: bash <(curl qip.cx/vps/wg.sh?dev)
 

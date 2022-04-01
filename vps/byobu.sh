@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ "$(readlink /proc/$$/exe)" = /usr/bin/bash ] || { curl -sL qip.cx/vps/byobu.sh | bash -s -- "$@"; exit; } ## Run in bash
+if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL qip.cx/vps/byobu.sh | bash -s -- "$@"; exit; fi ## Run in bash
 
 echo "⚑ Check dependencies.."
 if command -v apt &> /dev/null; then command -v byobu &> /dev/null || sudo apt install byobu -y -qq -o=Dpkg::Use-Pty=0; fi
@@ -51,11 +51,18 @@ if [ -f $status_path ]; then
     fi
   fi
 
+  byobu-ctrl-a emacs ## emacs | screen
   #byobu-enable
   echo "Run: byobu"
+  echo "Run: byobu-ctrl-a emacs"
   #byobu # Error: open terminal failed: not a terminal
 else
   echo "⚠ Config not found: $status_path"
   echo "Try start byobu and run script again"
   exit 1
 fi
+
+## @todo Replace in the ~/.bashrc
+#case "$TERM" in
+#    screen*|xterm|xterm-color|*-256color*) color_prompt=yes;;
+#esac
