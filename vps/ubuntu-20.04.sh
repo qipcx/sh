@@ -5,7 +5,7 @@ if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL qip.cx/vps/ubuntu-20
 ## Linked `sh` to `bash`
 sudo ln -sf bash /bin/sh && readlink /bin/sh
 
-sudo apt update -qq && sudo apt upgrade -y
+sudo apt update -qq && sudo apt upgrade -y -qq
 #sudo hostnamectl set-hostname oracle-micro-ams2
 
 [[ -f /etc/profile.d/bash_completion.sh ]] || sudo apt install bash-completion -y

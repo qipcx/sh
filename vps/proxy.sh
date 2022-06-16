@@ -27,8 +27,9 @@ test -z "$user" && { echo "Not specified --user!"; exit 2; }
 test -z "$pass" && { echo "Not specified --pass!"; exit 3; }
 
 ## Ubuntu/Debian
+ENV PIP_ROOT_USER_ACTION=ignore
 if command -v apt &> /dev/null; then command -v pip &> /dev/null || sudo apt install python3-pip -y; fi
-command -v proxy &> /dev/null || sudo pip install --upgrade --prefix /usr/local proxy.py
+command -v proxy &> /dev/null || env PIP_DISABLE_ROOT_WARNING=1 sudo pip install --upgrade proxy.py ## --prefix /usr/local
 
 command -v proxy &> /dev/null || { echo "Не удалось установить proxy.py!"; exit 9; }
 
