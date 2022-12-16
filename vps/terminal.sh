@@ -55,7 +55,7 @@ EOT
 # 🛈 ☛ << Значки сдвигают строку при выделении и копировании
 echo "Restore keybindings:  bind -f ~/.inputrc-backup.conf"
 #echo 'stty sane && bind -f ~/.inputrc-backup.conf'
-echo "Apply keybindings: bind -f ~/.inputrc"
+echo "Apply keybindings:    bind -f ~/.inputrc"
 
 #Configure Byobu's ctrl-a behavior...
 #
