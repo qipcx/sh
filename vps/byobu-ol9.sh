@@ -20,8 +20,6 @@ which make
 
 echo "We are going to download version ${BYOBU_VERSION} of byobu and install it..."
 
-
-
 echo "Setting up temporary folder"
 UNIQUE_FOLDER=$(date +%s)
 cd /tmp
