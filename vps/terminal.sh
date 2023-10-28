@@ -4,7 +4,12 @@ if ! readlink /proc/$$/exe | grep 'bin/bash' > /dev/null; then curl -sL qip.cx/v
 
 bind -p > ~/.inputrc-backup.conf 2>/dev/null
 
+## @note For ZSH
+#bindkey "\C-h" backward-kill-word
+#bindkey "\C-u" unix-line-discard
+
 #cat <<<EOF
+#bind '"\C-u": unix-line-discard' ## default
 #bind '"\C-h": backward-kill-word'
 #bind '"\e[3;5~": kill-word'  ## Ctrl+Del
 #bind '"\e[3;2~": kill-whole-line'
@@ -13,6 +18,10 @@ bind -p > ~/.inputrc-backup.conf 2>/dev/null
 #bind '"\e[A": history-search-backward'
 #bind '"\e[B": history-search-forward'
 #EOF
+
+# The text M-C-e is read as ‘Meta-Control-e’
+# beginning-of-line (C-a) | Ctrl+A | Move to the start of the current line.
+# end-of-line (C-e)       | Ctrl+E | Move to the end of the line.
 
 ## Not works from script
 #bind '"\C-h": backward-kill-word' 2>/dev/null   ## Ctrl+Backspace
