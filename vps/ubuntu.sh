@@ -5,17 +5,21 @@ if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL qip.cx/vps/ubuntu.sh
 ## Linked `sh` to `bash`
 sudo ln -sf bash /bin/sh && readlink /bin/sh
 
+echo "Update & Upgrade packages..."
 sudo apt update -qq && sudo apt upgrade -y -qq
 #sudo hostnamectl set-hostname oracle-micro-ams2
 
+echo "Install bash-completion"
 [[ -f /etc/profile.d/bash_completion.sh ]] || sudo apt install bash-completion -y
 #[[ -f /etc/profile.d/bash_completion.sh ]] && . /etc/profile.d/bash_completion.sh # Need load in shell
 
+echo "Setup timezone & locale"
 sudo timedatectl set-timezone Europe/Kiev
 sudo localectl set-locale LC_TIME=C.UTF-8
 #timedatectl list-timezones | grep Kiev
 #sudo systemctl restart mysql.service
 
+echo "Install nano, cron..."
 command -v nano &> /dev/null || sudo apt install nano -y -qq -o=Dpkg::Use-Pty=0
 command -v cron &> /dev/null || (sudo apt install cron -y -qq -o=Dpkg::Use-Pty=0 && sudo systemctl enable cron)
 

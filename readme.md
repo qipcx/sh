@@ -13,7 +13,9 @@ sudo ln -sf bash /bin/sh
 ```
 
 ```shell
-curl qip.cx/vps/ubuntu.sh | sh
+bash <(curl -s qip.cx/vps/ubuntu.sh) # OK
+#curl qip.cx/vps/ubuntu.sh | sh ## не работает интерактив
+
 curl qip.cx/vps/terminal.sh | sh
 #curl qip.cx/vps/terminal.sh | sh -s option=valus
 
