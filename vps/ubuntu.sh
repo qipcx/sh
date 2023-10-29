@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL qip.cx/vps/ubuntu-20.04.sh | bash -s -- "$@"; exit; fi ## Run in bash
+if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL qip.cx/vps/ubuntu.sh | bash -s -- "$@"; exit; fi ## Run in bash
 
 ## Linked `sh` to `bash`
 sudo ln -sf bash /bin/sh && readlink /bin/sh
