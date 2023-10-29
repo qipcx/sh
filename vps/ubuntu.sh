@@ -19,9 +19,10 @@ sudo localectl set-locale LC_TIME=C.UTF-8
 #timedatectl list-timezones | grep Kiev
 #sudo systemctl restart mysql.service
 
-echo "Install nano, cron..."
+echo "Install nano, cron, iputils-ping..."
 command -v nano &> /dev/null || sudo apt install nano -y -qq -o=Dpkg::Use-Pty=0
 command -v cron &> /dev/null || (sudo apt install cron -y -qq -o=Dpkg::Use-Pty=0 && sudo systemctl enable cron)
+command -v ping &> /dev/null || sudo apt install iputils-ping -y -qq -o=Dpkg::Use-Pty=0
 
 read -r -n 1 -p "Do you want to install the Docker? [Y/n] " reply
 if [[ -z "$reply" || "$reply" =~ ^([yY][eE][sS]|[yY])$ ]]; then
@@ -39,6 +40,7 @@ if [[ -z "$reply" || "$reply" =~ ^([yY][eE][sS]|[yY])$ ]]; then
   sudo apt update
   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
   sudo systemctl start docker
+  sudo usermod -aG docker $USER
 fi
 
 read -r -n 1 -p "Do you want to install the Byobu? [Y/n] " reply
@@ -49,5 +51,6 @@ fi
 #sudo apt install python3-pip
 
 echo "Do exec:"
-echo ". /etc/profile.d/bash_completion.sh"
+echo 'For docker permissions: su -s ${USER}'
+echo '. /etc/profile.d/bash_completion.sh'
 echo 'bind '"\C-h": backward-kill-word''
