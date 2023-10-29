@@ -59,9 +59,7 @@ fi
   echo "Run: byobu"
   echo "Run: byobu-ctrl-a emacs"
   #byobu # Error: open terminal failed: not a terminal
-
-  echo
-  echo "use to autostart byobu: byobu-enable"
+  echo "Use to autostart byobu: byobu-enable"
 else
   echo "⚠ Config not found: $status_path"
   echo "Try start byobu and run script again"

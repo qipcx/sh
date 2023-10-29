@@ -13,12 +13,13 @@ sudo ln -sf bash /bin/sh
 ```
 
 ```shell
-curl qip.cx/vps/ubuntu-20.04.sh | sh
+curl qip.cx/vps/ubuntu.sh | sh
 curl qip.cx/vps/terminal.sh | sh
-curl qip.cx/vps/terminal.sh | sh -s option=valus
-#curl qip.cx/vps/byobu.sh | bash      ## не работает интерактив
+#curl qip.cx/vps/terminal.sh | sh -s option=valus
+
 bash <(curl -s qip.cx/vps/byobu-ol9.sh)
 bash <(curl -s qip.cx/vps/byobu.sh)
+#curl qip.cx/vps/byobu.sh | bash      ## не работает интерактив
 
 curl qip.cx/vps/proxy.sh | bash -s -- --port=XXXXX --user=user --pass=XXXXX
 curl qip.cx/vps/vpn.sh | sh
