@@ -20,7 +20,7 @@ sudo timedatectl set-timezone Europe/Kiev
 #timedatectl list-timezones | grep Kiev
 #sudo systemctl restart mysql.service
 
-command -v nano &> /dev/null || sudo apt install nano -y
+command -v nano &> /dev/null || sudo apt install nano -y ## @todo А если yum
 
 read -r -n 1 -p "Install the Byobu? [Y/n] " reply
 if [[ -z "$reply" || "$reply" =~ ^([yY][eE][sS]|[yY])$ ]]; then
