@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL qip.cx/vps/wg.sh | bash -s -- "$@"; exit; fi ## Run in bash
+if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL sh.qip.cx/wg.sh | bash -s -- "$@"; exit; fi ## Run in bash
 
-[ "${-#*s}" = "$-" ] || { echo "⚠ Run as: bash <(curl qip.cx/vps/wg.sh)"; bash <(curl -sL qip.cx/vps/wg.sh) -s -- "$@"; exit 0; } ## Exec from stdin. Try run with `read` support
-# @todo Required run as: bash <(curl qip.cx/vps/wg.sh?dev)
+[ "${-#*s}" = "$-" ] || { echo "⚠ Run as: bash <(curl sh.qip.cx/wg.sh)"; bash <(curl -sL sh.qip.cx/wg.sh) -s -- "$@"; exit 0; } ## Exec from stdin. Try run with `read` support
+# @todo Required run as: bash <(curl sh.qip.cx/wg.sh?dev)
 
 if ! command -v wg-quick &> /dev/null; then
   curl -sL https://raw.githubusercontent.com/angristan/wireguard-install/master/wireguard-install.sh -O

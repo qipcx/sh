@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL qip.cx/vps/vpn.sh | bash -s -- "$@"; exit; fi ## Run in bash
+if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL sh.qip.cx/vpn.sh | bash -s -- "$@"; exit; fi ## Run in bash
 
 if command -v apt &> /dev/null; then command -v docker &> /dev/null || (sudo apt update -qq && sudo apt install docker.io -y -qq -o=Dpkg::Use-Pty=0); fi  ## 25 sec
 

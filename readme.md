@@ -1,10 +1,10 @@
-## Sorbing Utils
+## sh.qip.cx
 
-Use any location:
-```text
-raw.githubusercontent.com/sorbing/utils/main/vps/proxy.sh ## Cross-Origin Read Blocking (CORB)
-cdn.jsdelivr.net/gh/sorbing/utils@main/vps/proxy.sh
-qip.cx/vps/proxy.sh
+Using any location:
+```
+raw.githubusercontent.com/qipcx/sh/main/proxy.sh ## View
+cdn.jsdelivr.net/gh/qipcx/sh@main/proxy.sh       ## Download
+sh.qip.cx/proxy.sh
 ```
 
 * Set a short `/bin/sh` link to *bash* for simplify typing (or use `bash` instead `sh`): 
@@ -12,22 +12,23 @@ qip.cx/vps/proxy.sh
 sudo ln -sf bash /bin/sh
 ```
 
+Utils:
 ```shell
-bash <(curl -s qip.cx/vps/ubuntu.sh) # OK
-#curl qip.cx/vps/ubuntu.sh | sh ## не работает интерактив
+curl ip.qip.cx
 
-curl qip.cx/vps/terminal.sh | sh
-#curl qip.cx/vps/terminal.sh | sh -s option=valus
+curl sh.qip.cx
+curl sh.qip.cx/headers.php?json
 
-bash <(curl -s qip.cx/vps/byobu-ol9.sh)
-bash <(curl -s qip.cx/vps/byobu.sh)
-#curl qip.cx/vps/byobu.sh | bash      ## не работает интерактив
+bash <(curl -s sh.qip.cx/ubuntu.sh)
+bash <(curl -s sh.qip.cx/docker.sh)
+curl sh.qip.cx/terminal.sh | sh
+bash <(curl -s sh.qip.cx/byobu-ol9.sh)
+bash <(curl -s sh.qip.cx/byobu.sh)
+curl sh.qip.cx/proxy.sh | bash -s -- --port=XXXXX --user=user --pass=XXXXX
+bash <(curl -s sh.qip.cx/proxy.sh)
+curl sh.qip.cx/vpn.sh | sh
+bash <(curl -s sh.qip.cx/wg.sh)
 
-curl qip.cx/vps/proxy.sh | bash -s -- --port=XXXXX --user=user --pass=XXXXX
-curl qip.cx/vps/vpn.sh | sh
-bash <(curl -s qip.cx/vps/wg.sh)
-
-bash <(curl -s qip.cx/vps/proxy.sh)
-bash <(curl -s https://raw.githubusercontent.com/sorbing/utils/main/vps/proxy.sh)
-bash <(curl -s https://raw.githubusercontent.com/sorbing/utils/main/vps/proxy.sh) --port=XXXXX --user=... --pass=...
+bash <(curl -s sh.qip.cx/mailcow.sh)
+curl sh.qip.cx/nginx-watch-reload.sh | sh
 ```

@@ -1,56 +1,60 @@
 #!/bin/bash
 
-if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL qip.cx/vps/ubuntu.sh | bash -s -- "$@"; exit; fi ## Run in bash
+if [ -z "$BASH_VERSION" ]; then curl -sL https://sh.qip.cx/ubuntu.sh | bash -s -- "$@"; exit; fi ## /usr/bin/dash ## ## Run in bash
+#if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL sh.qip.cx/ubuntu.sh | bash -s -- "$@"; exit; fi ## Run in bash
 
-## Linked `sh` to `bash`
-sudo ln -sf bash /bin/sh && readlink /bin/sh
+source <(curl -sL https://sh.qip.cx/helper.sh)
 
-echo "Update & Upgrade packages..."
+
+sh_type=$(readlink /bin/sh)
+if ! [[ $sh_type =~ bash ]]; then
+  if confirm "Do you want to link \"sh\" to \"bash\" (current: $sh_type)?"; then
+    sudo ln -sf bash /bin/sh
+    echo "readlink /bin/sh ## $(readlink /bin/sh)"
+  fi
+fi
+
+echo_info "Do update & upgrade packages..."; sleep 3
 sudo apt update -qq && sudo apt upgrade -y -qq
 #sudo hostnamectl set-hostname oracle-micro-ams2
 
-echo "Install bash-completion"
+echo_info "Do install bash-completion"; sleep 3
 [[ -f /etc/profile.d/bash_completion.sh ]] || sudo apt install bash-completion -y
-#[[ -f /etc/profile.d/bash_completion.sh ]] && . /etc/profile.d/bash_completion.sh # Need load in shell
 
-echo "Setup timezone & locale"
+echo_info "Do setup timezone & locale"; sleep 3
 sudo timedatectl set-timezone Europe/Kiev
-sudo localectl set-locale LC_TIME=C.UTF-8
 #timedatectl list-timezones | grep Kiev
-#sudo systemctl restart mysql.service
+sudo localectl set-locale LC_TIME=C.UTF-8
 
-echo "Install nano, cron, iputils-ping..."
+#sudo apt install -y -qq apt-utils
+
+echo_info "Do install nano, cron, iputils-ping..."; sleep 3
 command -v nano &> /dev/null || sudo apt install nano -y -qq -o=Dpkg::Use-Pty=0
 command -v cron &> /dev/null || (sudo apt install cron -y -qq -o=Dpkg::Use-Pty=0 && sudo systemctl enable cron)
 command -v ping &> /dev/null || sudo apt install iputils-ping -y -qq -o=Dpkg::Use-Pty=0
 
-read -r -n 1 -p "Do you want to install the Docker? [Y/n] " reply
-if [[ -z "$reply" || "$reply" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  ## Old version!!
-  #sudo apt install docker.io docker-compose -y -qq -o=Dpkg::Use-Pty=0
-  #sudo usermod -aG docker $USER
-
-  sudo install -m 0755 -d /etc/apt/keyrings
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-  sudo chmod a+r /etc/apt/keyrings/docker.gpg
-  echo \
-    "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-    "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  sudo apt update
-  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
-  sudo systemctl start docker
-  sudo usermod -aG docker $USER
+if confirm "Do you want to install the Docker?"; then
+  bash <(curl sh.qip.cx/docker.sh)
 fi
 
-read -r -n 1 -p "Do you want to install the Byobu? [Y/n] " reply
-if [[ -z "$reply" || "$reply" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  bash <(curl -s qip.cx/vps/byobu.sh)
+if confirm "Do you want to install the Byobu?"; then
+  bash <(curl -s sh.qip.cx/byobu.sh)
+fi
+
+if confirm "Do you want to apply Git Aliases?"; then
+  git config --global alias.co checkout
+  git config --global alias.ci commit
+  git config --global alias.st status
+  git config --global alias.br branch
+  git config --global alias.hist "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
+  git config --global alias.type 'cat-file -t'
+  git config --global alias.dump 'cat-file -p'
 fi
 
 #sudo apt install python3-pip
+#sudo systemctl restart mysql.service
 
-echo "Do exec:"
-echo 'For docker permissions: su -s ${USER}'
-echo '. /etc/profile.d/bash_completion.sh'
-echo 'bind '"\C-h": backward-kill-word''
+echo_help 'su -s ${USER}                       ## Apply docker permissions'
+echo_help '. /etc/profile.d/bash_completion.sh ## Apply Shell Completion'
+echo_help "bind '\"\C-h\": backward-kill-word'   ## Apply Ctrl+Backspace"
+## bind '"\C-h": backward-kill-word'

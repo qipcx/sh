@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL qip.cx/vps/proxy.sh | bash -s -- "$@"; exit; fi ## Run in bash
+if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL sh.qip.cx/proxy.sh | bash -s -- "$@"; exit; fi ## Run in bash
 
 function randval() {
   cat /dev/urandom | tr -dc "${1:-"a-zA-Z0-9"}" | fold -w "${2:-12}" | head -n 1
