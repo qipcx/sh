@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ! readlink /proc/$$/exe | grep 'bin/bash' > /dev/null; then curl -sL sh.qip.cx/terminal.sh?dev | bash -s -- "$@"; exit; fi ## Run in bash
+if [ -z "$BASH_VERSION" ]; then curl -sL https://sh.qip.cx/terminal.sh | bash -s -- "$@"; exit; fi ## /usr/bin/dash ## ## Run in bash
 
 bind -p > ~/.inputrc-backup.conf 2>/dev/null
 

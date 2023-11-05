@@ -19,16 +19,18 @@ curl ip.qip.cx
 curl sh.qip.cx
 curl sh.qip.cx/headers.php?json
 
-bash <(curl -s sh.qip.cx/ubuntu.sh)
-bash <(curl -s sh.qip.cx/docker.sh)
+curl -sL sh.qip.cx/ubuntu.sh | sh
+curl -sL sh.qip.cx/docker.sh | sh
+
 curl sh.qip.cx/terminal.sh | sh
+curl sh.qip.cx/byobu.sh | sh
 bash <(curl -s sh.qip.cx/byobu-ol9.sh)
-bash <(curl -s sh.qip.cx/byobu.sh)
+
 curl sh.qip.cx/proxy.sh | bash -s -- --port=XXXXX --user=user --pass=XXXXX
 bash <(curl -s sh.qip.cx/proxy.sh)
 curl sh.qip.cx/vpn.sh | sh
 bash <(curl -s sh.qip.cx/wg.sh)
 
-bash <(curl -s sh.qip.cx/mailcow.sh)
-curl sh.qip.cx/nginx-watch-reload.sh | sh
+curl -sL sh.qip.cx/mailcow.sh | sh
+curl -sL sh.qip.cx/nginx-watch-reload.sh | sh
 ```

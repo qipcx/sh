@@ -1,7 +1,6 @@
 #!/bin/bash
 
 if [ -z "$BASH_VERSION" ]; then curl -sL https://sh.qip.cx/ubuntu.sh | bash -s -- "$@"; exit; fi ## /usr/bin/dash ## ## Run in bash
-#if ! readlink /proc/$$/exe | grep 'bin/bash'; then curl -sL sh.qip.cx/ubuntu.sh | bash -s -- "$@"; exit; fi ## Run in bash
 
 source <(curl -sL https://sh.qip.cx/helper.sh)
 
