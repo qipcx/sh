@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+## To Mailcow install
+## @see https://github.com/mailcow/mailcow-dockerized
+
 if [ -z "$BASH_VERSION" ]; then curl -sL https://sh.qip.cx/mailcow.sh | bash -s -- "$@"; exit; fi ## /usr/bin/dash ## ## Run in bash
 
 source <(curl -sL https://sh.qip.cx/helper.sh)

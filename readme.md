@@ -1,18 +1,18 @@
 ## sh.qip.cx
 
-Using any location:
+Use any location:
 ```
-raw.githubusercontent.com/qipcx/sh/main/proxy.sh ## View
-cdn.jsdelivr.net/gh/qipcx/sh@main/proxy.sh       ## Download
-sh.qip.cx/proxy.sh
+raw.githubusercontent.com/qipcx/sh/main/proxy.sh  ## To view
+cdn.jsdelivr.net/gh/qipcx/sh@main/proxy.sh        ## To download
+sh.qip.cx/ubuntu.sh                                ## Short
 ```
 
-* Set a short `/bin/sh` link to *bash* for simplify typing (or use `bash` instead `sh`): 
+You can set a short link *sh* to *bash* for simplify typing (or use `bash` instead `sh`): 
 ```shell
 sudo ln -sf bash /bin/sh
 ```
 
-Utils:
+Usage:
 ```shell
 curl ip.qip.cx
 
