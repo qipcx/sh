@@ -4,7 +4,7 @@ Use any location:
 ```
 raw.githubusercontent.com/qipcx/sh/main/proxy.sh  ## To view
 cdn.jsdelivr.net/gh/qipcx/sh@main/proxy.sh        ## To download
-sh.qip.cx/ubuntu.sh                                ## Short
+sh.qip.cx/ubuntu.sh                               ## Short link
 ```
 
 You can set a short link *sh* to *bash* for simplify typing (or use `bash` instead `sh`): 
