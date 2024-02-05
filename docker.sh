@@ -2,7 +2,7 @@
 
 ## To Docker install & setup
 
-if [ -z "$BASH_VERSION" ]; then curl -sL https://sh.qip.cx/ubuntu.sh | bash -s -- "$@"; exit; fi ## /usr/bin/dash ## ## Run in bash
+if [ -z "$BASH_VERSION" ]; then curl -sL https://sh.qip.cx/docker.sh | bash -s -- "$@"; exit; fi ## /usr/bin/dash ## ## Run in bash
 
 #docker -v              ## Docker version 24.0.7
 #docker compose version ## Docker Compose version v2.21.0

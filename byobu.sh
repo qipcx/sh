@@ -2,7 +2,7 @@
 
 ## To Byobu install & setup
 
-if [ -z "$BASH_VERSION" ]; then curl -sL https://sh.qip.cx/ubuntu.sh | bash -s -- "$@"; exit; fi ## /usr/bin/dash ## ## Run in bash
+if [ -z "$BASH_VERSION" ]; then curl -sL https://sh.qip.cx/byobu.sh | bash -s -- "$@"; exit; fi ## /usr/bin/dash ## ## Run in bash
 
 source <(curl -sL https://sh.qip.cx/helper.sh)
 
@@ -39,7 +39,7 @@ if [ -f $status_path ]; then
 
   echo_info "Byoby IP:  $byobu_ip"
   echo_info "Real IP:   $real_ip"
-  echo_info "Cached IP: $(cat $BYOBU_RUN_DIR/cache.$BYOBU_BACKEND/ip_address)"
+  [ -f "$BYOBU_RUN_DIR/cache.$BYOBU_BACKEND/ip_address" ] && echo_info "Cached IP: $(cat $BYOBU_RUN_DIR/cache.$BYOBU_BACKEND/ip_address)"
   sleep 5
 
   if [ "$byobu_ip" != "$real_ip" ]; then

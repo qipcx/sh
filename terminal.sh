@@ -2,11 +2,13 @@
 
 if [ -z "$BASH_VERSION" ]; then curl -sL https://sh.qip.cx/terminal.sh | bash -s -- "$@"; exit; fi ## /usr/bin/dash ## ## Run in bash
 
-bind -p > ~/.inputrc-backup.conf 2>/dev/null
+## (!) bind не поддерживает привязку нескольких клавиш на 1 команду!
 
-## @note For ZSH
-#bindkey "\C-h" backward-kill-word
-#bindkey "\C-u" unix-line-discard
+## \e[ : Alt
+##
+# bind -p | grep -F "\e[" ## Показать все комбинации с Alt
+
+bind -p > ~/.inputrc-backup.conf 2>/dev/null
 
 #cat <<<EOF
 #bind '"\C-u": unix-line-discard' ## default
@@ -19,13 +21,13 @@ bind -p > ~/.inputrc-backup.conf 2>/dev/null
 #bind '"\e[B": history-search-forward'
 #EOF
 
-# The text M-C-e is read as ‘Meta-Control-e’
+## @note For ZSH
+#bindkey "\C-h" backward-kill-word
+#bindkey "\C-u" unix-line-discard
+
+#: M-C-e == ‘Meta-Control-e’
 # beginning-of-line (C-a) | Ctrl+A | Move to the start of the current line.
 # end-of-line (C-e)       | Ctrl+E | Move to the end of the line.
-
-## Not works from script
-#bind '"\C-h": backward-kill-word' 2>/dev/null   ## Ctrl+Backspace
-
 
 tee ~/.inputrc cat > /dev/null <<EOT
 ## Ctrl+Backspace
