@@ -35,7 +35,7 @@ if [ -f $status_path ]; then
   fi
 
   byobu_ip=$(__ip_address t 2> /dev/null)
-  real_ip=$(curl -sL ip.qip.cx) ## 2ip.fun
+  real_ip=$(curl -sL ip.qip.cx)
 
   echo_info "Byoby IP:  $byobu_ip"
   echo_info "Real IP:   $real_ip"

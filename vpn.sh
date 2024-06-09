@@ -13,7 +13,7 @@ fi
 #sudo systemctl enable --now docker
 
 # 3333:1194 # https://api.ipify.org
-docker run -d --rm --cap-add=NET_ADMIN -p 1194:1194/udp -p 80:8080/tcp -e HOST_ADDR="$(curl -s 2ip.fun)" --name dockovpn alekslitvinenk/openvpn ## -it
+docker run -d --rm --cap-add=NET_ADMIN -p 1194:1194/udp -p 80:8080/tcp -e HOST_ADDR="$(curl -s ip.qip.cx)" --name dockovpn alekslitvinenk/openvpn ## -it
 
 echo "Usage as:"
 echo "docker exec dockovpn ./version.sh"

@@ -38,13 +38,13 @@ sudo iptables -I INPUT 1 -p tcp --dport "$port" -m state --state NEW,ESTABLISHED
 # OR: sudo iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
 cmd="proxy --hostname 0.0.0.0 --port $port --basic-auth $user:$pass"
 
-ip=$(curl -s 2ip.fun)
+ip=$(curl -s ip.qip.cx)
 
 echo
 echo "See: https://github.com/abhinavsingh/proxy.py#start-proxypy"
 echo "Run: $cmd"
 echo "IP:  $ip"
-echo "Use: curl -x http://$user:$pass@$ip:$port https://2ip.fun"
+echo "Use: curl -x http://$user:$pass@$ip:$port https://ip.qip.cx"
 echo
 
 eval "$cmd"
