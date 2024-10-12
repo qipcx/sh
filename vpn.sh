@@ -16,5 +16,6 @@ fi
 docker run -d --rm --cap-add=NET_ADMIN -p 1194:1194/udp -p 80:8080/tcp -e HOST_ADDR="$(curl -s ip.qip.cx)" --name dockovpn alekslitvinenk/openvpn ## -it
 
 echo "Usage as:"
+echo "docker exec -it dockovpn bash"
 echo "docker exec dockovpn ./version.sh"
 echo "docker exec dockovpn ./genclient.sh"
