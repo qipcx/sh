@@ -23,8 +23,10 @@ echo_info "Do install bash-completion"; sleep 3
 [[ -f /etc/profile.d/bash_completion.sh ]] || sudo apt install bash-completion -y
 
 echo_info "Do setup timezone & locale"; sleep 3
-sudo timedatectl set-timezone Europe/Kiev
+test -f /usr/share/zoneinfo/Europe/Kiev && sudo timedatectl set-timezone Europe/Kiev
+test -f /usr/share/zoneinfo/Europe/Kyiv && sudo timedatectl set-timezone Europe/Kyiv ## Оновлення Ubuntu 22.04
 #timedatectl list-timezones | grep Kiev
+#timedatectl status
 sudo localectl set-locale LC_TIME=C.UTF-8
 
 #sudo apt install -y -qq apt-utils

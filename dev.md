@@ -1,4 +1,9 @@
 ```shell
+docker compose up
+docker compose exec nginx sh
+```
+
+```shell
 #curl sh.qip.cx/ubuntu.sh | sh ## не работает интерактив
 #curl sh.qip.cx/terminal.sh | sh -s option=valus
 #curl sh.qip.cx/byobu.sh | bash      ## не работает интерактив
